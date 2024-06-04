@@ -28,8 +28,13 @@ To set up the environment and install the necessary dependencies, follow these s
    conda create -n new_meme_env
    conda activate new_meme_env
 Install MEME-suite: 
+ ```bash
 conda install -c bioconda meme
-Verify the Installation: meme --version
+```
+Verify the Installation: 
+ ```bash
+meme --version
+```
 
 
 # Usage
@@ -43,8 +48,10 @@ Before running the tests, ensure you set the PYTHONPATH to your current director
 ```bash
 export PYTHONPATH=$(pwd)
 ```
-To run the tests, use the following command: python test_data/test_motifquest.py
-
+To run the tests, use the following command: 
+ ```bash
+python test_data/test_motifquest.py
+```
 
 
 # Contributors
