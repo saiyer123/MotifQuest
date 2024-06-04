@@ -21,6 +21,17 @@ MotifQuest leverages efficient algorithms for pattern matching and statistical m
 To install the necessary dependencies, run:
 ```bash```
 pip install -r requirements.txt
+To set up the environment and install the necessary dependencies, follow these steps:
+
+1. **Create and activate a new Conda environment:**
+   ```bash
+   conda create -n new_meme_env
+   conda activate new_meme_env
+Install MEME-suite: 
+conda install -c bioconda meme
+Verify the Installation:
+meme --version
+
 
 # Usage
 
