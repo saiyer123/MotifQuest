@@ -30,9 +30,7 @@ To set up the environment and install the necessary dependencies, follow these s
 Install MEME-suite: 
 ```bash
 conda install -c bioconda meme
-Verify the Installation:
-```bash
-meme --version
+Verify the Installation: meme --version
 
 
 # Usage
