@@ -40,6 +40,10 @@ To run the tool, use the following command: python motifquest.py --input <input_
 ## Testing
 
 Example test datasets are provided in the `test_data` directory. To run tests, use: python test_motifquest.py
+Before running the tests, ensure you set the PYTHONPATH to your current directory: export PYTHONPATH=$(pwd)
+To run the tests, use the following command: python test_data/test_motifquest.py
+
+
 
 # Contributors
 
