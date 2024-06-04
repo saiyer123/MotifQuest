@@ -19,8 +19,9 @@ MotifQuest leverages efficient algorithms for pattern matching and statistical m
 # Installation
 
 To install the necessary dependencies, run:
-```bash```
+```bash
 pip install -r requirements.txt
+ ```
 To set up the environment and install the necessary dependencies, follow these steps:
 
 1. **Create and activate a new Conda environment:**
