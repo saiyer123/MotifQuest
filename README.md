@@ -28,8 +28,10 @@ To set up the environment and install the necessary dependencies, follow these s
    conda create -n new_meme_env
    conda activate new_meme_env
 Install MEME-suite: 
+```bash
 conda install -c bioconda meme
 Verify the Installation:
+```bash
 meme --version
 
 
