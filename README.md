@@ -42,6 +42,7 @@ Example test datasets are provided in the `test_data` directory. To run tests, u
 Before running the tests, ensure you set the PYTHONPATH to your current directory:
 ```bash
 export PYTHONPATH=$(pwd)
+```
 To run the tests, use the following command: python test_data/test_motifquest.py
 
 
