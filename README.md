@@ -47,6 +47,11 @@ To run the tool, use the following command:
 ```bash
 python motifquest.py --input test_data/extracted_nucleotide_sequences_dataset0.txt --output output_file.txt
 ```
+# Running Benchmarking
+To benchmark MotifQuest against MEME, use the following command:
+```bash
+python benchmark.py --input test_data/extracted_nucleotide_sequences_dataset0.txt
+```
 ## Testing
 
 Example test datasets are provided in the `test_data` directory. To run tests, use: python test_motifquest.py
