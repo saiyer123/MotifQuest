@@ -1,11 +1,8 @@
 def read_sequences(input_file):
     sequences = []
     with open(input_file) as f:
-        count = 0
         for line in f:
-            count += 1
-            if count % 4 == 2:  # Only read the sequence lines
-                sequences.append(line.strip())
+            sequences.append(line.strip())
     return sequences
 
 def calculate_pwm(sequences):
@@ -35,52 +32,6 @@ def calculate_pwm(sequences):
     for seq in filtered_sequences:
         for i, base in enumerate(seq):
             if base in base_to_index:
-                counts[i, base_to_index[base]] += 1
-            else:
-                # Skip sequences with unexpected bases
-                print(f"Skipping sequence with unexpected base: {seq}")
-                filtered_sequences.remove(seq)
-                break
-    
-    print("Counts matrix before normalization:\n", counts)  # Debugging the counts matrix
-    
-    # Check for rows with all zeroes before normalization
-    for i, row in enumerate(counts):
-        if row.sum() == 0:
-            print(f"Row {i} has all zero counts")
-
-    # Calculate the PWM
-    with np.errstate(divide='ignore', invalid='ignore'):
-        pwm = counts / counts.sum(axis=1, keepdims=True)
-        pwm[np.isnan(pwm)] = 0  # Replace NaNs with 0
-    
-    print("PWM matrix:\n", pwm)  # Debugging the PWM matrix
-    
-    return pwm
-
-def main():
-    import argparse
-    
-    parser = argparse.ArgumentParser(description='Calculate PWM from FASTQ sequences.')
-    parser.add_argument('--input', required=True, help='Input FASTQ file')
-    parser.add_argument('--output', required=True, help='Output file for PWM')
-    args = parser.parse_args()
-    
-    # Read sequences from the input FASTQ file
-    sequences = read_sequences(args.input)
-    
-    # Calculate the PWM
-    try:
-        pwm = calculate_pwm(sequences)
-        
-        # Write the PWM to the output file
-        with open(args.output, 'w') as f:
-            f.write("PWM:\n")
-            f.write(str(pwm))
-    except ValueError as e:
-        print(e)
-
-if __name__ == '__main__':
-    main()
+                counts[i
 
 
