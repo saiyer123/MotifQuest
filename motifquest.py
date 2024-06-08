@@ -66,8 +66,8 @@ if __name__ == "__main__":
         plt.savefig(output_histogram_filename)
         print(f"Histogram plot saved as {output_histogram_filename}")
 
-    # Show plot
-    plt.show()
+        # Display the histogram plot
+        plt.show()
 
     # Calculate the PWM
     motif_length = 6  # Example motif length
@@ -77,6 +77,7 @@ if __name__ == "__main__":
     with open(args.output, 'w') as f:
         f.write("PWM:\n")
         np.savetxt(f, pwm)
+
 
 
 
