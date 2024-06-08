@@ -1,51 +1,46 @@
+import sys
 import numpy as np
+from Bio import SeqIO
 
-# Function to read sequences from FASTQ file
-def read_sequences(file_path):
+def read_sequences(input_file):
     sequences = []
-    with open(file_path, 'r') as f:
-        for i, line in enumerate(f):
-            if i % 4 == 1:  # The sequence lines in a FASTQ file are every 4th line, starting from the second line
-                sequences.append(line.strip())
+    for record in SeqIO.parse(input_file, "fastq"):
+        sequences.append(str(record.seq).upper())
     return sequences
 
-# Function to calculate PWM
 def calculate_pwm(sequences):
-    sequence_length = len(sequences[0])
-    counts = np.zeros((sequence_length, 4))  # Initialize count matrix
+    # Define the bases and their corresponding indices
+    bases = ['A', 'C', 'G', 'T']
+    base_to_index = {base: idx for idx, base in enumerate(bases)}
     
-    # Dictionary to map nucleotides to indices
-    base_to_index = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
+    # Initialize the counts matrix
+    counts = np.zeros((len(sequences[0]), len(bases)))
     
-    # Fill the count matrix
     for seq in sequences:
         for i, base in enumerate(seq):
             if base in base_to_index:
                 counts[i, base_to_index[base]] += 1
-
-    # Avoid division by zero by adding a small epsilon value
-    pwm = counts / (counts.sum(axis=1, keepdims=True) + 1e-6)
+            else:
+                print(f"Unexpected character '{base}' at position {i} in sequence {seq}")
+    
+    # Calculate the position weight matrix (PWM)
+    pwm = counts / counts.sum(axis=1, keepdims=True)
     return pwm
 
-# Read sequences from the input FASTQ file
-input_file = "test_data/cse185proj.fastq"
-sequences = read_sequences(input_file)
-
-# Check if sequences were read correctly
-if len(sequences) == 0:
-    print("No sequences read from the file.")
-else:
+def main(input_file, output_file):
+    sequences = read_sequences(input_file)
     print(f"Read {len(sequences)} sequences.")
+    pwm = calculate_pwm(sequences)
+    with open(output_file, 'w') as f:
+        f.write("PWM:\n")
+        f.write(str(pwm))
+    print(f"Saved PWM to {output_file}.")
 
-# Calculate the PWM
-pwm = calculate_pwm(sequences)
-
-# Print the PWM
-print("PWM:")
-print(pwm)
-
-# Save the PWM to an output file
-output_file = "test_data/cse185_output.txt"
-with open(output_file, 'w') as f:
-    f.write("PWM:\n")
-    np.savetxt(f, pwm)
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: python motifquest.py --input <input_file> --output <output_file>")
+        sys.exit(1)
+    
+    input_file = sys.argv[sys.argv.index("--input") + 1]
+    output_file = sys.argv[sys.argv.index("--output") + 1]
+    main(input_file, output_file)
