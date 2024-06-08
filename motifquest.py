@@ -1,11 +1,13 @@
 import numpy as np
-from Bio import SeqIO
 import argparse
 
 def read_sequences(input_file):
     sequences = []
-    for record in SeqIO.parse(input_file, "fasta"):
-        sequences.append(str(record.seq))
+    with open(input_file, 'r') as f:
+        for line in f:
+            sequence = line.strip()
+            if sequence:  # Check if the line is not empty
+                sequences.append(sequence)
     return sequences
 
 def initialize_pwm(sequences, motif_length):
@@ -36,7 +38,7 @@ if __name__ == "__main__":
     parser.add_argument("--output", required=True, help="Output file for results")
     args = parser.parse_args()
 
-    # Read sequences from the input FASTA file
+    # Read sequences from the input file
     sequences = read_sequences(args.input)
 
     # Check if sequences were read correctly
