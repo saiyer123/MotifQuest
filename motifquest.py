@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import argparse
 
 def read_sequences(input_file):
@@ -47,14 +48,17 @@ if __name__ == "__main__":
     else:
         print(f"Read {len(sequences)} sequences.")
 
-    motif_length = 6  # Example motif length
-    pwm = find_motifs(sequences, motif_length)
-    # Print the PWM
-    print("PWM:")
-    print(pwm)
+    # Plot histogram of nucleotide frequencies
+    nucleotide_counts = {'A': 0, 'C': 0, 'G': 0, 'T': 0}
+    for sequence in sequences:
+        for nucleotide in sequence:
+            if nucleotide in nucleotide_counts:
+                nucleotide_counts[nucleotide] += 1
 
-    # Save the PWM to an output file
-    with open(args.output, 'w') as f:
-        f.write("PWM:\n")
-        np.savetxt(f, pwm)
+    plt.bar(nucleotide_counts.keys(), nucleotide_counts.values())
+    plt.xlabel('Nucleotide')
+    plt.ylabel('Frequency')
+    plt.title('Nucleotide Frequency Histogram')
+    plt.show()
+
 
