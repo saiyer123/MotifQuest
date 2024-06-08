@@ -4,13 +4,14 @@ def calculate_pwm(sequences):
     # Create a dictionary to map nucleotides to indices
     base_to_index = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
     
-    # Initialize the counts array
-    counts = np.zeros((len(sequences[0]), len(base_to_index)))
-    
-    # Debug: Print sequences
-    print("Sequences:")
+    # Ensure all sequences are of the same length
+    sequence_length = len(sequences[0])
     for seq in sequences:
-        print(seq)
+        if len(seq) != sequence_length:
+            raise ValueError("All sequences must be of the same length")
+    
+    # Initialize the counts array
+    counts = np.zeros((sequence_length, len(base_to_index)))
     
     # Count the occurrences of each nucleotide at each position
     for seq in sequences:
@@ -18,16 +19,8 @@ def calculate_pwm(sequences):
             if base in base_to_index:
                 counts[i, base_to_index[base]] += 1
     
-    # Debug: Print counts before normalization
-    print("Counts before normalization:")
-    print(counts)
-    
     # Convert counts to probabilities (PWM)
     pwm = counts / counts.sum(axis=1, keepdims=True)
-    
-    # Debug: Print PWM
-    print("PWM:")
-    print(pwm)
     
     return pwm
 
@@ -62,3 +55,4 @@ def read_sequences(input_file):
 
 if __name__ == '__main__':
     main()
+
