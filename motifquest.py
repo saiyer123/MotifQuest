@@ -41,8 +41,16 @@ def calculate_pwm(sequences):
     
     print("Counts matrix before normalization:\n", counts)  # Debugging the counts matrix
     
+    # Check for rows with all zeroes before normalization
+    for i, row in enumerate(counts):
+        if row.sum() == 0:
+            print(f"Row {i} has all zero counts")
+
     # Calculate the PWM
-    pwm = counts / counts.sum(axis=1, keepdims=True)
+    with np.errstate(divide='ignore', invalid='ignore'):
+        pwm = counts / counts.sum(axis=1, keepdims=True)
+        pwm[np.isnan(pwm)] = 0  # Replace NaNs with 0
+    
     print("PWM matrix:\n", pwm)  # Debugging the PWM matrix
     
     return pwm
@@ -71,5 +79,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 
