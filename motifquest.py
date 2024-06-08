@@ -4,14 +4,14 @@ from Bio import SeqIO
 def read_sequences(input_file):
 # Function to read sequences from FASTQ file
     def read_sequences(file_path):
-    sequences = []
-    for record in SeqIO.parse(input_file, "fasta"):
-        sequences.append(str(record.seq))
-    with open(file_path, 'r') as f:
-        for i, line in enumerate(f):
-            if i % 4 == 1:  # The sequence lines in a FASTQ file are every 4th line, starting from the second line
-                sequences.append(line.strip())
-    return sequences
+        sequences = []
+        for record in SeqIO.parse(input_file, "fasta"):
+            sequences.append(str(record.seq))
+        with open(file_path, 'r') as f:
+            for i, line in enumerate(f):
+                if i % 4 == 1:  # The sequence lines in a FASTQ file are every 4th line, starting from the second line
+                    sequences.append(line.strip())
+        return sequences
 
 def initialize_pwm(sequences, motif_length):
     # Initialize PWM with random values
