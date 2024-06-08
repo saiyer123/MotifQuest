@@ -36,7 +36,7 @@ def find_motifs(sequences, motif_length):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="MotifQuest: Motif Finding Tool")
     parser.add_argument("--input", required=True, help="Input file with sequences")
-    parser.add_argument("--output", required=True, help="Output file for results")
+    parser.add_argument("--output", required=True, help="Output file for PWM results")
     args = parser.parse_args()
 
     # Read sequences from the input file
@@ -59,6 +59,19 @@ if __name__ == "__main__":
     plt.xlabel('Nucleotide')
     plt.ylabel('Frequency')
     plt.title('Nucleotide Frequency Histogram')
+
+    # Save the histogram plot if an output file is specified
+    if args.output:
+        plt.savefig(args.output.replace(".txt", "_histogram.png")) # Save as PNG image
+        print(f"Histogram plot saved as {args.output.replace('.txt', '_histogram.png')}")
+
+    # Show plot
     plt.show()
+
+    # Save the PWM to an output file
+    with open(args.output, 'w') as f:
+        f.write("PWM:\n")
+        np.savetxt(f, pwm)
+
 
 
