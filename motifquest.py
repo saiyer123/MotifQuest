@@ -10,6 +10,8 @@ def read_sequences(input_file):
 
 def calculate_pwm(sequences):
     import numpy as np
+
+    print("Sequences read:", sequences[:10])  # Print first 10 sequences for debugging
     
     # Determine the most common sequence length
     lengths = [len(seq) for seq in sequences]
@@ -21,6 +23,8 @@ def calculate_pwm(sequences):
     if len(filtered_sequences) == 0:
         raise ValueError("No sequences of the most common length found")
     
+    print("Filtered sequences:", filtered_sequences[:10])  # Print first 10 filtered sequences for debugging
+    
     # Initialize the count matrix
     counts = np.zeros((most_common_length, 4))
     base_to_index = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
@@ -29,6 +33,10 @@ def calculate_pwm(sequences):
         for i, base in enumerate(seq):
             if base in base_to_index:
                 counts[i, base_to_index[base]] += 1
+            else:
+                print(f"Unexpected base '{base}' found in sequence '{seq}'")  # Debugging unexpected bases
+    
+    print("Counts matrix:", counts)  # Debugging the counts matrix
     
     # Calculate the PWM
     pwm = counts / counts.sum(axis=1, keepdims=True)
