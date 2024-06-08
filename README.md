@@ -42,7 +42,7 @@ meme --version
 
 To run the tool, use the following command: 
 ```bash
-python motifquest.py --input <input_file> --output <output_file>
+python motifquest.py --input test_data/extracted_nucleotide_sequences_dataset0.txt --output output_file.txt
 ```
 ## Testing
 
