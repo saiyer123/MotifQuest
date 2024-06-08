@@ -77,9 +77,9 @@ pwm = find_motifs(sequences, motif_length)
 print("PWM:")
 print(pwm)
 
-    with open(args.output, 'w') as f:
-        f.write("PWM:\n")
-        f.write(str(pwm))
+with open(args.output, 'w') as f:
+    f.write("PWM:\n")
+    f.write(str(pwm))
 # Save the PWM to an output file
 output_file = "test_data/cse185_output.txt"
 with open(output_file, 'w') as f:
