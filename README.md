@@ -22,6 +22,21 @@ To install the necessary dependencies, run:
 ```bash
 pip install -r requirements.txt
  ```
+# Running MEME with Docker
+Pull the MEME Suite Docker image:
+```bash
+docker pull memesuite/memesuite
+```
+Run MEME on your FASTA file:
+```bash
+docker run -v ~/meme_data:/data memesuite/memesuite meme /data/new_extracted_nucleotide_sequences_dataset0.fasta -o /data/meme_output_new
+```
+#### For macOS:
+1. Download Docker Desktop for Mac from the [Docker website](https://www.docker.com/products/docker-desktop).
+2. Open the downloaded `.dmg` file and drag the Docker icon to your Applications folder.
+3. Open Docker from your Applications folder.
+4. Follow the instructions in the Docker Desktop window to complete the setup.
+
 To set up the environment and install the necessary dependencies, follow these steps:
 
 1. **Create and activate a new Conda environment:**
@@ -47,6 +62,11 @@ To run the tool, use the following command:
 ```bash
 python motifquest.py --input test_data/extracted_nucleotide_sequences_dataset0.txt --output output_file.txt
 ```
+To Run MEME on the FASTA formatted file:
+```bash
+docker run -v ~/meme_data:/data memesuite/memesuite meme /data/new_extracted_nucleotide_sequences_dataset0.fasta -o /data/meme_output_new
+```
+
 # Running Benchmarking
 To benchmark MotifQuest against MEME, use the following command:
 ```bash
