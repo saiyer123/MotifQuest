@@ -62,11 +62,16 @@ if __name__ == "__main__":
 
     # Save the histogram plot if an output file is specified
     if args.output:
-        plt.savefig(args.output.replace(".txt", "_histogram.png")) # Save as PNG image
-        print(f"Histogram plot saved as {args.output.replace('.txt', '_histogram.png')}")
+        output_histogram_filename = args.output.replace(".txt", "_histogram.png")
+        plt.savefig(output_histogram_filename)
+        print(f"Histogram plot saved as {output_histogram_filename}")
 
     # Show plot
     plt.show()
+
+    # Calculate the PWM
+    motif_length = 6  # Example motif length
+    pwm = find_motifs(sequences, motif_length)
 
     # Save the PWM to an output file
     with open(args.output, 'w') as f:
