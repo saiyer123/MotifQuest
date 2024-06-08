@@ -3,7 +3,7 @@ from Bio import SeqIO
 
 def read_sequences(input_file):
 # Function to read sequences from FASTQ file
-def read_sequences(file_path):
+    def read_sequences(file_path):
     sequences = []
     for record in SeqIO.parse(input_file, "fasta"):
         sequences.append(str(record.seq))
