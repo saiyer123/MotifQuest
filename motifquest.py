@@ -37,7 +37,10 @@ def calculate_pwm(sequences):
             if base in base_to_index:
                 counts[i, base_to_index[base]] += 1
             else:
-                print(f"Unexpected base '{base}' found in sequence '{seq}'")  # Debugging unexpected bases
+                # Skip sequences with unexpected bases
+                print(f"Skipping sequence with unexpected base: {seq}")
+                filtered_sequences.remove(seq)
+                break
     
     print("Counts matrix before normalization:\n", counts)  # Debugging the counts matrix
     
@@ -79,4 +82,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
