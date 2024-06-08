@@ -27,7 +27,8 @@ def calculate_pwm(sequences):
     
     for seq in filtered_sequences:
         for i, base in enumerate(seq):
-            counts[i, base_to_index[base]] += 1
+            if base in base_to_index:
+                counts[i, base_to_index[base]] += 1
     
     # Calculate the PWM
     pwm = counts / counts.sum(axis=1, keepdims=True)
