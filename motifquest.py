@@ -70,9 +70,9 @@ if __name__ == "__main__":
 # Calculate the PWM
 pwm = calculate_pwm(sequences)
 
-    sequences = read_sequences(args.input)
-    motif_length = 6  # Example motif length
-    pwm = find_motifs(sequences, motif_length)
+sequences = read_sequences(args.input)
+motif_length = 6  # Example motif length
+pwm = find_motifs(sequences, motif_length)
 # Print the PWM
 print("PWM:")
 print(pwm)
