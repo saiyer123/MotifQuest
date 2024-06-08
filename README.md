@@ -25,6 +25,9 @@ pip install -r requirements.txt
 To set up the environment and install the necessary dependencies, follow these steps:
 
 1. **Create and activate a new Conda environment:**
+   Using Miniconda or Anaconda
+If you have Miniconda or Anaconda installed, you can create a new Conda environment and install the necessary dependencies as follows:
+
    ```bash
    conda create -n new_meme_env
    conda activate new_meme_env
